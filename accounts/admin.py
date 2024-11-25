@@ -39,7 +39,6 @@ class UserAdmin(BaseUserAdmin):
     )
     search_fields = ('username', 'email') 
 
-admin.site.register(CustomUser, UserAdmin)
 
 class UserAdmin(auth_admin.UserAdmin):
     fieldsets = (
@@ -62,8 +61,8 @@ class UserAdmin(auth_admin.UserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     change_password_form = auth_admin.AdminPasswordChangeForm
-    list_display = ('email', 'first_name', 'last_name', 'is_superuser')
-    list_filter = ('event', 'is_staff', 'is_superuser', 'is_active', 'groups')
+    list_display = ('username', 'email', 'age')  
+    list_filter = ('is_active',)
     search_fields = ('first_name', 'last_name', 'email')
     ordering = ('email',)
     readonly_fields = ('last_login', 'date_joined',)

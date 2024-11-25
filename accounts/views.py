@@ -12,13 +12,20 @@ from django.urls import reverse
 from django.contrib.auth.views import (
     PasswordChangeView, PasswordChangeDoneView) 
 from django.contrib.auth.mixins import UserPassesTestMixin 
+from .models import CustomUser
 
 User = get_user_model()
 
+class UserUpdate(UpdateView):
+    model = CustomUser
+    form_class = UserUpdateForm
+    template_name = 'accounts/user_update.html'
+    success_url = '/success-url/'
+    
 class UserCreateAndLoginView(CreateView):
     form_class = CustomUserCreationForm 
     template_name = "accounts/signup.html"
-    success_url = reverse_lazy("blog:index")
+    success_url = reverse_lazy("tasks:index")
 
     def form_valid(self, form):
         response = super().form_valid(form)

@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-from .models import Article
-from .forms import ArticleForm
 from .models import Task
 from .forms import TaskCreationForm
 from django.contrib.auth.decorators import login_required
@@ -19,14 +17,14 @@ def create(request):
     if request.method == 'POST':
         title = request.POST['title']
         content = request.POST['content']
-        article = Article(title=title, content=content)
-        article.save()
-        return redirect('blog:index')
+        task = Task(title=title, content=content)
+        task.save()
+        return redirect('tasks:index')
     else:
         params = {
-            'form': ArticleForm(),
+            'form': TaskCreationForm(),
         }
-        return render(request, 'blog/create.html', params)
+        return render(request, 'tasks/create.html', params)
 
 
 def detail(request, task_id):
